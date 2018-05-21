@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Shell.Framework.Commands
+﻿namespace Sitecore.Support.Shell.Framework.Commands
 {
   using Sitecore;
   using Sitecore.Collections;
@@ -14,8 +14,9 @@
   using global::System;
   using global::System.Collections.Specialized;
   using global::System.Linq;
+  using Sitecore.Shell.Framework.Commands;
 
-  [Serializable]
+[Serializable]
   public class Workflow : Command
   {
     protected const string CheckModifiedKey = "checkmodified";
@@ -137,7 +138,15 @@
     [UsedImplicitly]
     protected void WorkflowCompleteCallback(WorkflowPipelineArgs args)
     {
-      Context.ClientPage.SendMessage(this, "item:refresh");
+      // The fix: redraw Content Editor after item was moved through workflow with "Supress comment" checked
+      if (args.CommentFields.Count > 0)
+      {
+        Context.ClientPage.SendMessage(this, "item:refresh");
+      }
+      else
+      {
+        SheerResponse.Redraw();
+      }
     }
   }
 }
