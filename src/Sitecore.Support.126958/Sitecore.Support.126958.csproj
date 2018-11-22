@@ -57,7 +57,9 @@
     <Compile Include="Shell\Framework\Commands\Workflow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\zzz\Sitecore.Support.126958.config" />
+    <Content Include="App_Config\Include\zzz\Sitecore.Support.126958.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

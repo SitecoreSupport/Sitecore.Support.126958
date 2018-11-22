@@ -195,7 +195,14 @@
     [UsedImplicitly]
     protected void WorkflowCompleteCallback(WorkflowPipelineArgs args)
     {
-      Context.ClientPage.SendMessage(this, "item:refresh");
+      if (args.CommentFields.Count > 0)
+      {
+        Context.ClientPage.SendMessage(this, "item:refresh");
+      }
+      else
+      {
+        SheerResponse.Redraw();
+      }
     }
 
     #region Private methods
